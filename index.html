@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Time series period</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.js">
+</head>
+<body>
+	<form id="input-form">
+		<input type="text" pattern="^[01]+$" title="Only accept binary string! (ex: 1011101011010101)" id="input-string" required/>
+		<input type="number" min="0" max="100" id="input-threshold" required/>
+		<input type="submit" value="Submit">
+	</form>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>
