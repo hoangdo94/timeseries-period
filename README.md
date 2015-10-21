@@ -4,7 +4,6 @@
 > **Sinh viên:** ĐỖ NGUYỄN KHÁNH HOÀNG
 > **MSSV:** 51201200
 
-
 ----------
 
 ## **Đề xuất giải thuật**
@@ -71,4 +70,19 @@ Vì vậy, độ phức tạp của giải thuật là $O(n^3)$
         }
     }
 
+## **Nhận xét về giải thuật** ##
+
+ - Độ phức tạp còn cao ($O(n^3)$) nên chỉ dùng được với các tập dữ liệu vừa và nhỏ
+ - Vì giải thuật sử dụng brute-force và dừng lại khi tìm được giá trị thõa mức threshold nên có thể dẫn đến sự tối ưu cục bộ (không trả về được bộ giá trị tốt nhất)
+
 ## **Một số kết quả** ##
+> Có thể sử dụng ứng dụng trực tiếp (webapp) tại: http://hoangdo94.github.io/timeseries-period
+
+|Input (timeseries, threshold)|Output (period, start index, support)|
+|--------|:-------|
+|1001001001001, 99%|3, 0, 100%|
+|011001001101101, 90%|2, 12, 100%|
+|0001110101010011010101111100011101, 80%| 2, 29, 100%|
+|0101010110001010101011110101110001111, 50%|1, 27, 55.56%|
+|0101010110001010101011110101110001111, 60%|1, 32, 75%|
+
