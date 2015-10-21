@@ -1,17 +1,36 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="UTF-8">
-	<title>Time series period</title>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.js">
+    <meta charset="UTF-8">
+    <title>Time series period</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
+
 <body>
-	<form id="input-form">
-		<input type="text" pattern="^[01]+$" title="Only accept binary string! (ex: 1011101011010101)" id="input-string" required/>
-		<input type="number" min="0" max="100" id="input-threshold" required/>
-		<input type="submit" value="Submit">
-	</form>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/main.js"></script>
+    <div class="container">
+        <h1>Timeseries Symbol Period</h1>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form id="input-form">
+                    <div class="form-group">
+                        <label for="input-string">Timeseries:</label>
+                        <input class="form-control" type="text" pattern="^[01]+$" title="Only accept binary string! (ex: 1011101011010101)" id="input-string" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-threshold">Threshold:</label>
+                        <input class="form-control" type="number" min="0" max="99" id="input-threshold" required/>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Find Period</button>
+                </form>
+                <br>
+                <div class="well" id="result">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
+
 </html>
