@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hello!</title>
+<link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body><div class="container"><h1 id="khai-phá-tính-chu-kỳ-trong-dữ-liệu-thời-gian" style="text-align:center; font-weight:bold;">Khai phá tính chu kỳ trong dữ liệu thời gian</h1>
+
+<blockquote>
+  <p><strong>GVHD</strong>: Thầy TRẦN MINH QUANG <br>
+  <strong>Sinh viên:</strong> ĐỖ NGUYỄN KHÁNH HOÀNG <br>
+  <strong>MSSV:</strong> 51201200</p>
+</blockquote>
+
+<hr>
+
+<h2 id="đề-xuất-giải-thuật"><strong>Đề xuất giải thuật</strong></h2>
+
+
+
+<h3 id="ý-tưởng">Ý tưởng</h3>
+
+<p>Sử dụng giải thuật theo hướng brute-force để giải quyết cái yêu cầu của bài toán:</p>
+
+<ul>
+<li>Lần lượt thử các chu kỳ <strong><em>p</em></strong> (từ <script id="MathJax-Element-97" type="math/tex">1</script> tới <script id="MathJax-Element-98" type="math/tex">n/2</script>)</li>
+<li>Với mỗi chu kỳ, thử lần lượt các điểm bắt đầu <strong><em>s</em></strong> có thể (từ <script id="MathJax-Element-99" type="math/tex">1</script> tới <script id="MathJax-Element-100" type="math/tex">n - p</script>)</li>
+<li>Với mỗi bộ giá trị <strong><em>p</em></strong>, <strong><em>s</em></strong>, tính độ hỗ trợ (support) <strong><em>c</em></strong></li>
+</ul>
+
+<h3 id="pseudocode">Pseudocode</h3>
+
+<pre><code>function findPeriod
+    input: timeseries, threshold
+    output: period, start index, support
+begin
+    var c
+    for p := 1 to n/2
+        for s:= 0 to n - p
+            c := support(timeseries, p, s)
+            if (c &gt; threshold) then
+                return {p, s, c}
+            end if
+end 
+</code></pre>
+
+<h2 id="độ-phức-tạp-của-giải-thuật"><strong>Độ phức tạp của giải thuật</strong></h2>
+
+<p>Giải thuật sử dụng 2 vòng lặp lồng nhau, trong đó mỗi vòng lặp có độ phức tạp <script id="MathJax-Element-22" type="math/tex">O(n)</script>, và giải thuật tính support cũng có độ phức tạp <script id="MathJax-Element-23" type="math/tex">O(n)</script>.  <br>
+Vì vậy, độ phức tạp của giải thuật là <script id="MathJax-Element-24" type="math/tex">O(n^3)</script></p>
+
+<h2 id="hiện-thực-giải-thuật"><strong>Hiện thực giải thuật</strong></h2>
+
+<blockquote>
+  <p>Hiện thực giải thuật bằng javscript, có thể sử dụng trực tiếp trên website</p>
+</blockquote>
+
+<pre><code>//Tính support
+function sup(timeseries, p, s) {
+    var proj = '';
+    for (var i = s; i&lt;timeseries.length; i+=p) {
+        proj += timeseries[i];
+    }
+    var z = 0;
+    for (var i=1; i&lt;proj.length; i++) {
+        if (proj[i] === '1' &amp;&amp; proj[i-1] === '1') z++;
+    }
+    return z/(proj.length - 1);
+}
+
+//Tìm chu kỳ, trả về kết quả
+function findPeriod(timeseries, threshold) {
+    var n = timeseries.length;
+    for (var p=1; p&lt;=n/2; p++) {
+        for (var s=0; s&lt; n-p; s++) {
+            var c = sup(timeseries, p ,s);
+            if (100*c &gt; threshold) {
+                return {
+                    p: p,
+                    s: s,
+                    c: c,
+                }
+            }
+        }
+    }
+}
+</code></pre>
+
+
+
+<h2 id="nhận-xét-về-giải-thuật"><strong>Nhận xét về giải thuật</strong></h2>
+
+<ul>
+<li>Độ phức tạp còn cao (<script id="MathJax-Element-126" type="math/tex">O(n^3)</script>) nên chỉ dùng được với các tập dữ liệu vừa và nhỏ</li>
+<li>Vì giải thuật sử dụng brute-force và dừng lại khi tìm được giá trị thõa mức threshold nên có thể dẫn đến sự tối ưu cục bộ (không trả về được bộ giá trị tốt nhất)</li>
+</ul>
+
+<h2 id="một-số-kết-quả"><strong>Một số kết quả</strong></h2>
+
+<blockquote>
+  <p>Có thể sử dụng ứng dụng trực tiếp (webapp) tại: <a href="http://hoangdo94.github.io/timeseries-period">http://hoangdo94.github.io/timeseries-period</a></p>
+</blockquote>
+
+<table>
+<thead>
+<tr>
+  <th>Input (timeseries, threshold)</th>
+  <th align="left">Output (period, start index, support)</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>1001001001001, 99%</td>
+  <td align="left">3, 0, 100%</td>
+</tr>
+<tr>
+  <td>011001001101101, 90%</td>
+  <td align="left">2, 12, 100%</td>
+</tr>
+<tr>
+  <td>0001110101010011010101111100011101, 80%</td>
+  <td align="left">2, 29, 100%</td>
+</tr>
+<tr>
+  <td>0101010110001010101011110101110001111, 50%</td>
+  <td align="left">1, 27, 55.56%</td>
+</tr>
+<tr>
+  <td>0101010110001010101011110101110001111, 60%</td>
+  <td align="left">1, 32, 75%</td>
+</tr>
+</tbody></table></div></body>
+</html>
