@@ -1,8 +1,8 @@
 #Khai phá tính chu kỳ trong dữ liệu thời gian
 
-> **GVHD**: Thầy TRẦN MINH QUANG
-> **Sinh viên:** ĐỖ NGUYỄN KHÁNH HOÀNG
-> **MSSV:** 51201200
+**GVHD**: Thầy TRẦN MINH QUANG
+**Sinh viên:** ĐỖ NGUYỄN KHÁNH HOÀNG
+**MSSV:** 51201200
 
 ----------
 
