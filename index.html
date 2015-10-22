@@ -23,6 +23,13 @@
                         <label for="input-threshold">Threshold:</label>
                         <input class="form-control" type="number" min="0" max="99" id="input-threshold" required/>
                     </div>
+                    <div class="form-group">
+                        <label for="input-algorithm">Algorithm:</label>
+                        <select class="form-control" id="input-algorithm" required/>
+                            <option value="bf">Brute force</option>
+                            <option value="hr">Heuristic</option>
+                        </select>
+                    </div>
                     <button class="btn btn-primary" type="submit">Find Period</button>
                 </form>
                 <br>
